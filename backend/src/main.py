@@ -1,6 +1,5 @@
 from obd_service import OBD_SERVICE
 from socket_server import startSocketServer
-import time
 import obd
 
 def main():

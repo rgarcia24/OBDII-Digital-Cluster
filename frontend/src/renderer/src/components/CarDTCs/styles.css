@@ -1,0 +1,18 @@
+.msg-status {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+.getting {
+  color: white;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

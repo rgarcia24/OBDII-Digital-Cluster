@@ -44,31 +44,11 @@ class OBD_SERVICE:
         self.current_rpms = float(rpm)
 
 
-
-    # def getSpeed(self):
-    #     try:
-    #         speedUnits = self.executeCommand(SPEED).to(self.measurements)
-    #         speed_convert =roundUnits(speedUnits)
-    #         speed =  removeUnits(str(speed_convert))
-    #         return speed
-    #     except Exception as e:
-    #         print("Something went wrong getting speed")
-    #         print(e)
-    #         sys.exit(1)
-
-    # def getRPM(self):
-    #     try:
-    #         rpmUnits = self.executeCommand(RPM).to("rpm")
-    #         rpm_convert = roundUnits(rpmUnits)
-    #         rpm =  removeUnits(str(rpm_convert))
-    #         return rpm
-    #     except Exception as e:
-    #         print("Something went wrong getting RPMs")
-    #         print(e)
-    #         sys.exit(1)
-
     def get_dtcs(self):
-        return self.execute_cmd(GET_DTC)
+        dtc = self.execute_cmd(obd.commands.GET_DTC)
+        if(dtc is None):
+            return {"Data":[], "Status": "No DTCs found"}
+        return {"Data": dtc, "Status": "DTCs found"}
     
 
     def get_check_engine_light(self):

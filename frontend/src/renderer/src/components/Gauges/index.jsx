@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import io from 'socket.io-client'
+import React, { useContext, useEffect, useState } from "react";
 import Speedometer, {
   Background,
   Arc,
@@ -10,15 +9,17 @@ import Speedometer, {
   DangerPath,
 } from 'react-speedometer';
 import { Group, Space } from '@mantine/core'
+import AppContext from "../../context/AppContext";
 
-
-const socket = io('ws://localhost:5000', { transports: ['websocket'] })
 
 const Guages = () => {
+
+  const { socket } = useContext(AppContext);
+
   const [data, setData] = useState({ speed: 0, rpm: 0 });
 
   const resetGuages = () => {
-    setData(prevData => ({ ...prevData, speed: 0, rpm: 0 }));
+    setData(prevData => ({ speed: 0, rpm: 0 }));
   }
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const Guages = () => {
     }, 1000);
 
     socket.on('data', newData => {
-      console.log(newData)
       setData(prevData => ({ ...prevData, ...newData }));
     });
     socket.on("connect_error", (err) => {
@@ -49,8 +49,6 @@ const Guages = () => {
 
   return (
     <>
-      {/* <h1>Message From Socket Server</h1>
-      <p>Speed MPH: {data.speed}  RPM: {data.rpm}</p> */}
       <Group position="center" spacing="xl" >
         <Speedometer
           value={data.speed}
@@ -64,7 +62,7 @@ const Guages = () => {
 
         >
           <Background />
-          <Arc color="#2e2f34" opacity={0.5} />
+          <Arc color="#2e2f34" opacity={0.5} arcWidth={15} />
           <Needle color="#ff6358" offset={15} />
           <Progress color="#ff6358" arcWidth={50} opacity={0.5} />
           <Marks numbersRadius={25} />
@@ -99,7 +97,7 @@ const Guages = () => {
 
         >
           <Background />
-          <Arc color="#2e2f34" opacity={0.5} />
+          <Arc color="#2e2f34" opacity={0.5} arcWidth={15} />
           <Needle color="#ff6358" offset={15} />
           <Progress color="#ff6358" arcWidth={50} opacity={0.5} />
           <Marks step={500} numbersRadius={25} />
