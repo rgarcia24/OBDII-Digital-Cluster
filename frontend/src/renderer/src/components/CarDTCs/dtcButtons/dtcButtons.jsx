@@ -7,6 +7,7 @@ const DTCButtons = ({ setStatus, setMsg }) => {
 
   useEffect(() => {
     const handleDTCs = (dtcs) => {
+      console.log(dtcs)
       setMsg(dtcs.Status);
       setDTCs(dtcs.Data);
 

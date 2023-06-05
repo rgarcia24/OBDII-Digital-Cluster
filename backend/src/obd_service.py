@@ -46,6 +46,7 @@ class OBD_SERVICE:
 
     def get_dtcs(self):
         dtc = self.execute_cmd(GET_DTC)
+        print(dtc)
         if(dtc is None):
             return {"Data":[], "Status": "No DTCs found"}
         return {"Data": dtc, "Status": "DTCs found"}

@@ -1,5 +1,6 @@
 import { ScrollArea, Table, createStyles } from '@mantine/core'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import AppContext from '../../../context/AppContext'
 
 import "./styles.css"
 
@@ -39,57 +40,15 @@ const useStyles = createStyles((theme) => ({
 const DTCList = () => {
   const [scrolled, setScrolled] = useState(false);
   const { classes, cx } = useStyles();
+  const { DTCs } = useContext(AppContext)
 
 
-  const data = [{
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  }, {
-    code: "P234",
-    description: "Faulty Sensor"
-  },]
 
-  const rows = data.map((row) => {
+  const rows = DTCs.map((row) => {
     return (
       <tr className='dtclist-row'>
-        <td className='dtclist-td'>{row.code}</td>
-        <td className='dtclist-td'>{row.description}</td>
+        <td className='dtclist-td'>{row[0]}</td>
+        <td className='dtclist-td'>{row[1]}</td>
       </tr>
     )
   })
