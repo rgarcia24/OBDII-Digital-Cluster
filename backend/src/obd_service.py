@@ -1,6 +1,6 @@
 import obd
 from utils import roundUnits, removeUnits
-from constants import GET_DTC, SPEED, RPM, CHECK_ENGINE_LIGHT
+from constants import GET_DTC, SPEED, RPM, CHECK_ENGINE_LIGHT, CLEAR_DTCS
 import sys
 
 class OBD_SERVICE:
@@ -45,10 +45,14 @@ class OBD_SERVICE:
 
 
     def get_dtcs(self):
-        dtc = self.execute_cmd(obd.commands.GET_DTC)
+        dtc = self.execute_cmd(GET_DTC)
         if(dtc is None):
             return {"Data":[], "Status": "No DTCs found"}
         return {"Data": dtc, "Status": "DTCs found"}
+    
+    def clear_dtcs(self):
+       status =  self.execute_cmd(CLEAR_DTCS)
+       return {"Status": "DTCs cleared"}
     
 
     def get_check_engine_light(self):
